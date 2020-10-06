@@ -9,8 +9,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    let studentNames = ["Amber", "Helene", "Nicole"]
+    @State private var selectedStudent = 0
+    @State private var checkAmount = ""
+    @State private var numberOfPeople = 2
+    @State private var tipPercentage = 2
+    let tipPercentages = [10, 15, 20, 25, 0]
+    
     var body: some View {
-        Text("Hello, World!")
+        NavigationView {
+            Form {
+                Section {
+                    TextField("Amount", text: $checkAmount)
+                        .keyboardType(.decimalPad)
+                    Picker("Number of people", selection: $numberOfPeople) {
+                        ForEach(2 ..< 100) {
+                            Text("\($0) people")
+                        }
+                    }
+                }
+                Section {
+                    Text("$\(checkAmount)")
+                }
+            }
+        }
     }
 }
 
