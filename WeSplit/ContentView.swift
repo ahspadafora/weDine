@@ -26,7 +26,8 @@ struct ContentView: View {
     }
     
     var tipValue: Double {
-        return orderAmount / 100 * tipSelection
+        let tipVal = orderAmount / 100 * tipSelection
+        return tipVal
     }
     var totalPerPerson: Double {
         let grandTotal = tipValue + orderAmount
@@ -35,6 +36,10 @@ struct ContentView: View {
     }
     var grandTotal: Double {
         return tipValue + orderAmount
+    }
+    
+    var isTipping: Bool {
+        return tipPercentage == tipPercentages.count - 1 ? false : true
     }
     
     var body: some View {
@@ -57,7 +62,7 @@ struct ContentView: View {
                     Text("$\(totalPerPerson, specifier: "%.2f")")
                 }
                 Section(header: Text("Grand Total")) {
-                    Text("$\(grandTotal, specifier: "%.2f")")
+                    Text("$\(grandTotal, specifier: "%.2f")").background(isTipping ? Color.white : Color.red)
                 }
             }.navigationBarTitle("WeSplit")
         }
